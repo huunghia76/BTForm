@@ -9,9 +9,8 @@ const StudentTable = () => {
     const [inputSearchValue, setInputSearchValue] = useState()
 
     const studentSearch = studentList.filter((item) =>
-        item.hoTen.toLowerCase().includes(inputSearchValue.toLowerCase()
+        item.hoTen?.toLowerCase().includes(inputSearchValue?.toLowerCase()
         ))
-    console.log("studentSearch: ", studentSearch);
 
     return (
         <div className='mt-3'>
