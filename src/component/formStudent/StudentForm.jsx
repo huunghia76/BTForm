@@ -112,7 +112,8 @@ const StudentForm = () => {
                                     value={formValue?.maSV || ''}
                                     onChange={handleFormValue()}
                                     required
-                                    minLength={5}
+                                    pattern='^[a-zA-Z0-9]*$'
+                                    minLength={3}
                                     maxLength={8}
                                     autoComplete="off"
                                 />
@@ -139,7 +140,7 @@ const StudentForm = () => {
                                     type="text"
                                     required
                                     maxLength={10}
-                                    pattern="^[0-9]+$"
+                                    pattern='[0-9]{10}'
                                     value={formValue?.phoneNumber || ''}
                                     onChange={handleFormValue()}
                                     autoComplete="off"
@@ -153,7 +154,7 @@ const StudentForm = () => {
                                     label="Email"
                                     type="text"
                                     required
-                                    pattern="^[a-zA-Z][a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$"
+                                    pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
                                     value={formValue?.email || ''}
                                     onChange={handleFormValue()}
                                     autoComplete="off"

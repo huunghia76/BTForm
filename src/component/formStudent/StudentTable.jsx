@@ -1,18 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Input from '../input/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { BTFormAction } from '../../store/formStudent/slice';
 import swal from 'sweetalert';
+import { useQueryUrl } from './../../hook/useQueryUrl';
 
 const StudentTable = () => {
     const { studentList } = useSelector(state => state.BTFormStudent)
     const dispatch = useDispatch()
+    const [inputSearchValue, setInputSearchValue] = useState()
+
+    // const [queryParams, setQueryParams] = useQueryUrl();// custom hook sử dụng qs 
+
+    const studentSearch = studentList.filter((item) =>
+        item.hoTen.toLowerCase().includes(inputSearchValue.toLowerCase()
+        ))
+    console.log("studentSearch: ", studentSearch);
+
     return (
         <div className='mt-3'>
-            <div>
+            <div className=''>
                 <Input
                     type="text"
                     placeholder="Search with name.."
+                    value={inputSearchValue || ''}
+                    onChange={(e) => {
+                        setInputSearchValue(e.target.value)
+                    }}
                 ></Input>
 
             </div>
@@ -29,7 +43,7 @@ const StudentTable = () => {
                 </thead>
                 <tbody>
                     {
-                        studentList.map((item, key) => (
+                        (inputSearchValue ? studentSearch : studentList).map((item, key) => (
                             <tr key={item.maSV}>
                                 <td>{key + 1}</td>
                                 <td>{item.maSV}</td>
