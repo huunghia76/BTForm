@@ -3,14 +3,10 @@ import Input from '../input/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { BTFormAction } from '../../store/formStudent/slice';
 import swal from 'sweetalert';
-import { useQueryUrl } from './../../hook/useQueryUrl';
-
 const StudentTable = () => {
     const { studentList } = useSelector(state => state.BTFormStudent)
     const dispatch = useDispatch()
     const [inputSearchValue, setInputSearchValue] = useState()
-
-    // const [queryParams, setQueryParams] = useQueryUrl();// custom hook sử dụng qs 
 
     const studentSearch = studentList.filter((item) =>
         item.hoTen.toLowerCase().includes(inputSearchValue.toLowerCase()
