@@ -61,45 +61,46 @@ const StudentForm = () => {
             <div >
                 <div className=''>
                     <h2 className='text-white bg-dark py-3 ps-2'>Thông tin sinh viên</h2>
-                    <form 
+                    <form id='form_student'
                     noValidate//hủy validate tự động của browser
                     onSubmit={(ev) => {
-                    // Ngăn chặn sự kiện reload của browser khi submit form
-                    ev.preventDefault()
+                        // Ngăn chặn sự kiện reload của browser khi submit form
+                        ev.preventDefault()
 
 
-                    const ele = document.querySelectorAll('form input')
-                    // console.log("ele: ", ele);
-                    let errors = {}
-                    ele.forEach(el => {
-                        const { name } = el
-                            let mess = validate(el)
-                            errors[name] = mess
-                            setFormError(errors)
-                    })
-                    
+                        const ele = document.querySelectorAll('form input')
+                        // console.log("ele: ", ele);
+                        let errors = {}
+                        ele.forEach(el => {
+                            const { name } = el
+                                let mess = validate(el)
+                                errors[name] = mess
+                                setFormError(errors)
+                        })
+                        
 
-                    
-                    // check value đầu vào 
-                    let isFlag = false
-                    for(let key in errors){//nếu form error có lỗi break 
-                        if(errors[key]){
-                            isFlag = true
-                            break
+                        
+                        // check value đầu vào 
+                        let isFlag = false
+                        for(let key in errors){//nếu form error có lỗi break 
+                            if(errors[key]){
+                                isFlag = true
+                                break
+                            }
                         }
-                    }
-                    // nếu ko có lỗi thì return về giá trị
-                    if(isFlag) return
-                    
-                    if(!studentEdit){
-                        // create product
-                        dispatch(BTFormAction.addStudent(formValue))
-                    }else{
-                        // update
-                        dispatch(BTFormAction.updateStudent(formValue))
-                    }
-                    // console.log('submit')
-                }}
+                        // nếu ko có lỗi thì return về giá trị
+                        if(isFlag) return
+                        
+                        if(!studentEdit){
+                            // create product
+                            dispatch(BTFormAction.addStudent(formValue))
+                        }else{
+                            // update
+                            dispatch(BTFormAction.updateStudent(formValue))
+                        }
+                        setFormValue('')
+                        // console.log('submit')
+                    }}
                     >
                         <div className="row row-cols-2">
                             <div className="col">
