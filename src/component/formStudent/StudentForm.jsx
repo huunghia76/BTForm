@@ -169,7 +169,8 @@ const StudentForm = () => {
 
                         <div>
                         {studentEdit ? (
-                        <button className="btn btn-info">Update</button>
+                            <button className="btn btn-info">Update</button>
+                        
                         ) : (
                             <button className="btn btn-success">Thêm sinh viên</button>
                         )}

@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BTFormAction } from '../../store/formStudent/slice';
 import swal from 'sweetalert';
 const StudentTable = () => {
-    const { studentList } = useSelector(state => state.BTFormStudent)
+    const { studentList, studentEdit } = useSelector(state => state.BTFormStudent)
     const dispatch = useDispatch()
-    const [inputSearchValue, setInputSearchValue] = useState()
+    const [inputSearchValue, setInputSearchValue] = useState();
 
-    const studentSearch = studentList.filter((item) =>
+
+    const listSearch = studentList.filter((item) =>
         item.hoTen?.toLowerCase().includes(inputSearchValue?.toLowerCase()
         ))
 
@@ -23,7 +24,6 @@ const StudentTable = () => {
                         setInputSearchValue(e.target.value)
                     }}
                 ></Input>
-
             </div>
             <table className=" table  ">
                 <thead className='table-dark'>
@@ -38,7 +38,7 @@ const StudentTable = () => {
                 </thead>
                 <tbody>
                     {
-                        (inputSearchValue ? studentSearch : studentList).map((item, key) => (
+                        (inputSearchValue ? listSearch : studentList).map((item, key) => (
                             <tr key={item.maSV}>
                                 <td>{key + 1}</td>
                                 <td>{item.maSV}</td>
@@ -50,7 +50,9 @@ const StudentTable = () => {
                                         dispatch(BTFormAction.editStudent(item))
                                     }} className='btn btn-info me-2'>Edit</button>
 
-                                    <button onClick={() => {
+                                    <button 
+                                    disabled={!!studentEdit}
+                                    onClick={() => {
                                         swal({
                                             title: "Bạn chắc chứ?",
                                             text: "Bạn có chắc là muốn xóa sinh viên này không?",
